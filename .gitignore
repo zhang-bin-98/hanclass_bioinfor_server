@@ -1,0 +1,8 @@
+/.idea
+/.vscode
+/vendor
+log
+.env
+.DS_Store
+config/database.php
+docs/api/domain.md
