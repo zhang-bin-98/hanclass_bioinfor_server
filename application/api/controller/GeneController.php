@@ -5,7 +5,7 @@ namespace app\api\controller;
 use think\Controller;
 use think\Request;
 
-class Gene extends Controller
+class GeneController extends Controller
 {
     /**
      * 显示基因列表/详细信息
