@@ -16,23 +16,29 @@ class UserController extends Controller
      */
     public function login(Request $request)
     {
-        //
-        // $payload = array(
-        //     'iss' => 'admin',
-        //     'iat' => time(),
-        //     'exp' => time()+7200,
-        //     'nbf' => time(),
-        //     'user_id' => 0,
-        //     'user_name' => "a",
-        //     'user_role' => 0
-        // );
-        // $token=Jwt::getToken($payload);
+        $user_name = $request->param('user_name');
+        $password = $request->param('password');
+        
+        $payload = array(
+            'iss' => 'admin',
+            'iat' => time(),
+            'exp' => time()+7200,
+            'nbf' => time(),
+            'user_id' => 0,
+            'user_name' => $user_name,
+            'user_role' => 0
+        );
+        $token=Jwt::getToken($payload);
             
         // echo "user.login";
         
         
 
-        return json_encode([]);
+        return json_encode([          
+            "code" => 200,
+            "meg" => "登陆成功！",
+            "tocken" => $token
+        ]);
     }
 
 
@@ -41,27 +47,27 @@ class UserController extends Controller
      *
      * @return \think\Response
      */
-    public function index(Request $request, User $user_id = null)
+    public function index(Request $request, $user_id = null)
     {
         // 获取列表 先鉴权
-        if (is_null($user_id)) {
-            if ($request->user['user_role'] != 1) {
-                echo json_encode([
-                    "code" => 400,
-                    "msg" => "权限不足！"
-                ]);
-                die;
-            }
-            $res = User::select();
-        } else {
-            $res = User::where('user_id', $user_id)->select();
-        }
+        // if (is_null($user_id)) {
+        //     if ($request->user['user_role'] != 1) {
+        //         echo json_encode([
+        //             "code" => 400,
+        //             "msg" => "权限不足！"
+        //         ]);
+        //         die;
+        //     }
+        //     $res = User::select();
+        // } else {
+        //     $res = User::where('user_id', $user_id)->select();
+        // }
 
-        return json_encode([
-            "code" => 200,
-            "meg" => "获取成功！",
-            "data" => $res
-        ]);
+        // return json_encode([
+        //     "code" => 200,
+        //     "meg" => "获取成功！",
+        //     "data" => $res
+        // ]);
     }
 
     /**
@@ -72,6 +78,7 @@ class UserController extends Controller
     public function create(Request $request)
     {
         //
+        return "user.create";
     }
 
     /**

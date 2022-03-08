@@ -24,8 +24,8 @@ Route::group('user', function() {
     // 删除用户
     Route::delete(':user_id', 'delete');
 })
-->prefix('api/UserController/')
-->middleware('CheckToken');
+->prefix('api/UserController/');
+// ->middleware('CheckToken');
 
 
 
@@ -42,6 +42,6 @@ Route::group('gene', function() {
     // 删除基因信息
     Route::delete(':id', 'delete');
 })
-->prefix('api/GeneController/')
-->middleware('CheckToken');
+->prefix('api/GeneController/');
+// ->middleware('CheckToken');
 
