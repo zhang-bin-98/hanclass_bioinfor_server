@@ -6,7 +6,7 @@ class CheckTime
 {
     public function handle($request, \Closure $next)
     {
-        $time = $request->header('time');
+        $time = $request->header('Time');
 
         if (!isset($time) || intval($time) <= 1) {
             echo json_encode([

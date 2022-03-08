@@ -11,9 +11,9 @@
 
 /****************** 用户管理 **********************/
 // 用户登录
-Route::post('user/login', 'api/UserController/login');
+Route::post('user/login', 'UserController/login');
 // 用户注册
-Route::post('user', 'api/UserController/create');
+Route::post('user', 'UserController/create');
 
 Route::group('user', function() {
     // 用户列表(信息)
@@ -24,15 +24,15 @@ Route::group('user', function() {
     // 删除用户
     Route::delete(':user_id', 'delete');
 })
-->prefix('api/UserController/');
-// ->middleware('CheckToken');
+->prefix('UserController/')
+->middleware('CheckToken');
 
 
 
 /****************** 基因数据管理 **********************/
 // 基因列表/详细信息
-Route::get('gene', 'api/GeneController/index');
-Route::get('gene/:id', 'api/GeneController/index');
+Route::get('gene', 'GeneController/index');
+Route::get('gene/:id', 'GeneController/index');
 
 Route::group('gene', function() {
     // 添加基因信息
@@ -42,6 +42,6 @@ Route::group('gene', function() {
     // 删除基因信息
     Route::delete(':id', 'delete');
 })
-->prefix('api/GeneController/');
-// ->middleware('CheckToken');
+->prefix('GeneController/')
+->middleware('CheckToken');
 
