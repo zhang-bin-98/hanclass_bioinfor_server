@@ -29,11 +29,8 @@ class UserController extends Controller
             'user_role' => 0
         );
         $token=Jwt::getToken($payload);
-            
         // echo "user.login";
         
-        
-
         return json_encode([          
             "code" => 200,
             "meg" => "登陆成功！",
