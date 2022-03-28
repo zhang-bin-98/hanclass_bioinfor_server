@@ -32,7 +32,6 @@ Route::group('user', function() {
 /****************** 基因数据管理 **********************/
 // 基因列表/详细信息
 Route::get('gene', 'GeneController/index');
-Route::get('gene/:id', 'GeneController/index');
 
 Route::group('gene', function() {
     // 添加基因信息

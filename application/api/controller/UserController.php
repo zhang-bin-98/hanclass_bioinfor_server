@@ -67,7 +67,7 @@ class UserController extends Controller
         $payload = array(
             'iss' => 'admin',
             'iat' => time(),
-            'exp' => time() + 7200,
+            'exp' => time() + 86400,
             'nbf' => time(),
             'user_id' => $user["user_id"],
             'username' => $user["username"],
@@ -144,7 +144,8 @@ class UserController extends Controller
         if (true !== $result) {
             echo json_encode([
                 'code' => 400,
-                'msg' => "信息格式有误！"
+                'msg' => "信息格式有误！",
+                "data" => $result,
             ]);
             die;
         }
@@ -175,7 +176,7 @@ class UserController extends Controller
     }
 
     /**
-     * 删除指定资源
+     * 删除用户
      *
      * @param  int  $user_id
      * @return \think\Response
@@ -187,8 +188,7 @@ class UserController extends Controller
         if (!(1 === $user['user_role'] || $user_id == $user['user_id'])) {
             echo json_encode([
                 'code' => 400,
-                'msg' => "权限不足",
-                'data' => $user
+                'msg' => "权限不足"
             ]);
             die;
         }

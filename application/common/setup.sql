@@ -1,5 +1,4 @@
 
-USE s202128010315003
 
 CREATE TABLE IF NOT EXISTS user (
     user_id int PRIMARY KEY AUTO_INCREMENT,
@@ -15,21 +14,21 @@ DESC user;
 CREATE TABLE IF NOT EXISTS gene (
     gene_id int PRIMARY KEY AUTO_INCREMENT,
     user_id int,
-    virus_strain_name varchar(25),
-    accession_id varchar(25) NOT NULL UNIQUE,
-    data_resource varchar(25),
-    related_id varchar(25),
-    lineage varchar(25),
-    nuc_completeness varchar(25),
+    virus_strain_name varchar(255),
+    accession_id varchar(100) NOT NULL UNIQUE,
+    data_source varchar(100),
+    related_id varchar(100),
+    lineage varchar(100),
+    nuc_completeness varchar(100),
     sequence_length int,
-    sequence_quality varchar(25),
-    quality_assessment varchar(25),
-    host varchar(25),
+    sequence_quality varchar(100),
+    quality_assessment varchar(100),
+    host varchar(100),
     sample_collection_date DATETIME,
-    sample_location varchar(25),
-    originating_lab varchar(25),
+    location varchar(255),
+    originating_lab varchar(255),
     submission_date DATETIME,
-    submitting_lab varchar(25),
+    submitting_lab varchar(255),
     create_time DATETIME,
     last_update_time DATETIME,
     CONSTRAINT user_gene 
