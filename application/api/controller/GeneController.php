@@ -34,14 +34,15 @@ class GeneController extends Controller
             die;
         }
 
-        if(!is_null($advace)) {
-            $genes = Gene::where($advace);
-        } elseif(!is_null($filter)) {
+        
+        if(!is_null($filter)) {
             // 全局检索
             $genes = Gene::where(
                 'virus_strain_name|accession_id|data_source|lineage|host|location|originating_lab|submitting_lab',
                 'like',
                 '%'.$filter.'%');
+        } elseif(!is_null($advace)) {
+            $genes = Gene::where($advace);
         } else {
             $genes = Db::table('gene'); 
         }
@@ -76,7 +77,6 @@ class GeneController extends Controller
             ]
         ]);
     }
-
 
     /**
      * 查询集合
@@ -113,6 +113,35 @@ class GeneController extends Controller
             "msg" => "查询成功",
             "data" => $res
         ]);
+    }
+
+    public function count()
+    {
+        try {
+            $city = Gene::distinct(true)->field('location')->count();
+            $lineage = Gene::distinct(true)->field('lineage')->count();
+            $items = Gene::count();
+            $nuc_completeness_percent = Gene::where('nuc_completeness', 'Complete')->count() / $items;
+        } catch (\Exception $e) {
+            echo json_encode([
+                'code' => 400,
+                'msg' => "数据库错误：".$e->getMessage(),
+                "data" => $errGene
+            ]);
+            die;
+        }
+        
+        return json_encode([
+            "code" => 200,
+            "msg" => "查询成功",
+            "data" => [
+                "city" => $city,
+                "lineage" => $lineage,
+                "items" => $items,
+                "nuc_completeness_percent" => $nuc_completeness_percent
+            ]
+        ]);
+
     }
 
     /**
