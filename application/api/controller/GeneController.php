@@ -17,6 +17,7 @@ class GeneController extends Controller
     public function index(Request $request)
     {
         $filter = $request->param("filter");
+        $advace = (array)json_decode($request->param("advace"));
 
         $page = $request->param("page");
         $rows_per_page = $request->param("rowsPerPage");
@@ -33,7 +34,9 @@ class GeneController extends Controller
             die;
         }
 
-        if(!is_null($filter)) {
+        if(!is_null($advace)) {
+            $genes = Gene::where($advace);
+        } elseif(!is_null($filter)) {
             // 全局检索
             $genes = Gene::where(
                 'virus_strain_name|accession_id|data_source|lineage|host|location|originating_lab|submitting_lab',
@@ -68,8 +71,47 @@ class GeneController extends Controller
             "msg" => "查询成功",
             "data" => [
                 "rowsNumber" => $rowsNumber,
-                "returnedData" => $genes
+                "returnedData" => $genes,
+                "p" => $advace
             ]
+        ]);
+    }
+
+
+    /**
+     * 查询集合
+     */
+    public function summary()
+    {
+        $data = [
+            "data_source",
+            "lineage",
+            "nuc_completeness",
+            "sequence_quality",
+            "host",
+            "location",
+        ];
+
+        $res = array();
+        try {
+            foreach($data as $col) {
+                $t = Gene::distinct(true)->field($col)->select();
+                $t = json_decode(json_encode($t), true);
+                $res[$col] = array_column($t, $col);
+            }
+        } catch (\Exception $e) {
+            echo json_encode([
+                'code' => 400,
+                'msg' => "数据库错误：".$e->getMessage(),
+                "data" => $errGene
+            ]);
+            die;
+        }
+        
+        return json_encode([
+            "code" => 200,
+            "msg" => "查询成功",
+            "data" => $res
         ]);
     }
 
