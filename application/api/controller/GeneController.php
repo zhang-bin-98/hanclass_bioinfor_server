@@ -121,12 +121,13 @@ class GeneController extends Controller
             $city = Gene::distinct(true)->field('location')->count();
             $lineage = Gene::distinct(true)->field('lineage')->count();
             $items = Gene::count();
-            $nuc_completeness_percent = Gene::where('nuc_completeness', 'Complete')->count() / $items;
+            $nuc_completeness_percent = $items == 0 
+                ? 0 
+                : Gene::where('nuc_completeness', 'Complete')->count() / $items;
         } catch (\Exception $e) {
             echo json_encode([
                 'code' => 400,
-                'msg' => "数据库错误：".$e->getMessage(),
-                "data" => $errGene
+                'msg' => "数据库错误：".$e->getMessage()
             ]);
             die;
         }
