@@ -20,7 +20,7 @@ class Gene extends Validate
         'create_time' => 'dateFormat:Y-m-d H:i:s' ,
         'last_update_time' => 'dateFormat:Y-m-d H:i:s',
         'sequence_quality' => ['regex'=>'/^(High|Low)$/'],
-        'quality_assessment' => ['regex'=>'/^(\/?(0|-|NA)){5}$/'],
+        'quality_assessment' => ['regex'=>'/^(\/?.*?){5}$/'],
     ];
     
     /**
