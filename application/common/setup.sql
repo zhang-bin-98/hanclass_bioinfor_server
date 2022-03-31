@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS gene (
     host varchar(100),
     sample_collection_date DATETIME,
     location varchar(255),
-    originating_lab varchar(255),
+    originating_lab varchar(350),
     submission_date DATETIME,
-    submitting_lab varchar(255),
+    submitting_lab varchar(350),
     create_time DATETIME,
     last_update_time DATETIME,
     CONSTRAINT user_gene 
@@ -40,5 +40,5 @@ DESC genes;
 
 -- INSERT INTO user (username, password, user_role) VALUES ('zhangbin', 'zb123456', '1');
 -- INSERT INTO user (username, password, user_role) VALUES ('guoxutong', 'gxt123456', '1');
--- INSERT INTO user (username, password, user_role) VALUES ('zhangmeng', 'zm123456', '1');
 -- INSERT INTO user (username, password, user_role) VALUES ('lingfangmin', 'lfm123456', '1');
+-- INSERT INTO user (username, password, user_role) VALUES ('zhangmeng', 'zm123456', '1');

@@ -115,11 +115,14 @@ class GeneController extends Controller
         ]);
     }
 
+    /**
+     * 统计数量
+     */
     public function count()
     {
         try {
-            $city = Gene::distinct(true)->field('location')->count();
-            $lineage = Gene::distinct(true)->field('lineage')->count();
+            $city = Gene::field('location')->group('location')->count();
+            $lineage = Gene::field('lineage')->group('lineage')->count();
             $items = Gene::count();
             $nuc_completeness_percent = $items == 0 
                 ? 0 
@@ -197,7 +200,7 @@ class GeneController extends Controller
         try {
             $successGene = Db::name('gene')
                 ->data($geneChecked)
-                ->limit(100)
+                ->limit(1000)
                 ->insertAll();
         } catch (\Exception $e) {
             echo json_encode([
@@ -220,7 +223,8 @@ class GeneController extends Controller
         return json_encode([
             "code" => 200,
             "msg" => "添加 ".$successGene." 条数据！",
-            "data" => $errGene
+            "data" => $errGene,
+            "count" => $successGene
         ]);
     }
 
