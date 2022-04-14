@@ -46,3 +46,6 @@ Route::group('gene', function() {
 ->prefix('GeneController/')
 ->middleware('CheckToken');
 
+
+/********************* 用户工具 ********************/
+// blastn

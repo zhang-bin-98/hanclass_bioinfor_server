@@ -6,4 +6,5 @@ log
 .DS_Store
 config/database.php
 docs/api/domain.md
-extend
+extend/blast/db
+**/test*
