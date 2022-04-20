@@ -1,15 +1,13 @@
+## 用户信息接口
 
-@import "domain.md"
+### 1. 用户登录
 
-1. 用户登录
-
-> ==POST== {domain}/user/login
+**``POST``** {domain}/user/login
 
 |参数|类型|必须/可选|默认|描述|
 |-|-|-|-|-|
-|Time|int|==必须==|无|时间戳 header.Time|
-|username|string|==必须==|无|用户名|
-|password|string|==必须==|无|加密后的用户密码|
+|username|string|**必须**|无|用户名|
+|password|string|**必须**|无|加密后的用户密码|
 
 ```json {.line-numbers}
 {
@@ -26,15 +24,14 @@
 }
 ```
 
-2. 用户注册
+### 2. 用户注册
 
-> ==POST== {domain}/user
+**`POST`** {domain}/user
 
 |参数|类型|必须/可选|默认|描述|
 |-|-|-|-|-|
-|Time|int|==必须==|无|时间戳 header.Time|
-|username|string|==必须==|无|用户名|
-|password|string|==必须==|无|加密后的用户密码|
+|username|string|**必须**|无|用户名|
+|password|string|**必须**|无|加密后的用户密码|
 |email|string|可选|无|邮箱|
 
 ```json {.line-numbers}
@@ -52,14 +49,9 @@
 }
 ```
 
-3. 获取用户信息
+### 3. 获取用户信息
 
-> ==GET== {domain}/user[/:user_id]
-
-|参数|类型|必须/可选|默认|描述|
-|-|-|-|-|-|
-|Time|int|==必须==|无|时间戳 header.Time|
-|token|string|==必须==|无|用户确认 header.X-Authorization|
+**`GET`** {domain}/user[/:user_id]
 
 ```json {.line-numbers}
 {
@@ -77,15 +69,13 @@
 }
 ```
 
-4. 更新(修改)用户信息
+### 4. 更新(修改)用户信息
 
-> ==PUT== {domain}/user/:user_id
+**PUT** {domain}/user/:user_id
 
 |参数|类型|必须/可选|默认|描述|
 |-|-|-|-|-|
-|Time|int|==必须==|无|时间戳 header.Time|
-|token|string|==必须==|无|用户确认 header.X-Authorization|
-|user_id|string|==必须==|无|用户id|
+|user_id|string|**必须**|无|用户id|
 |username|string|可选|无|用户名|
 |password|string|可选|无|用户密码|
 |email|string|可选|无|邮箱|
@@ -97,14 +87,9 @@
 }
 ```
 
-6. 删除用户信息
+### 6. 删除用户信息
 
-> ==DELETE== {domain}/user/:user_id
-
-|参数|类型|必须/可选|默认|描述|
-|-|-|-|-|-|
-|Time|int|==必须==|无|时间戳 header.Time|
-|token|string|==必须==|无|用户确认 header.X-Authorization|
+**`DELETE`** {domain}/user/:user_id
 
 ```json {.line-numbers}
 {
@@ -112,3 +97,21 @@
     "msg": "删除成功！"
 }
 ```
+
+## 用户服务接口
+
+### 1. 请求服务接口
+
+**`POST`** {domain}/user/server/:sever_name
+
+### 2. 上传文件文件接口
+
+**`POST`** {domain}/user/server/:sever_name/upload
+
+### 3. 获取结果接口
+
+**`GET`** {domain}/user/server/:server_id
+
+### 4. 获取结果文件
+
+**`GET`** {domain}/user/server/:server_id/:file_name

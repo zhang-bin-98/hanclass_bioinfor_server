@@ -1,18 +1,19 @@
-@import "domain.md"
+# 序列数据接口
 
-1. 获取基因列表
+domain: 10.1.70.10/students/202128010315003/tp5/public
 
-> ==GET== {domain}/gene[?key1=value1[&key2=value2]]
-
+## 1. 获取序列列表
+  
+**`GET`** {domain}/seq
+  
 |参数|类型|必须/可选|默认|描述|
 |-|-|-|-|-|
-|Time|int|==必须==|无|时间戳 header.Time|
 |page|int|可选|1|当前页|
 |list_rows|int|可选|20|每页数量|
 |查询条件|string|可选|无|参数与值|
-
-
-```json {.line-numbers}
+  
+  
+```json
 {
     "code": 200,
     "msg": "查询成功！",
@@ -20,7 +21,7 @@
         "total": 1,
         "list": [
             {
-                "gene_id": "",
+                "seq_id": "",
                 "virus_strain_same": "",
                 "accession_id": "",
                 "data_source": "",
@@ -43,22 +44,16 @@
     }
 }
 ```
-
-2. 添加基因信息
-
-> ==POST== {domain}/gene
-
-|参数|类型|必须/可选|默认|描述|
-|-|-|-|-|-|
-|Time|int|==必须==|无|时间戳 header.Time|
-|token|string|==必须==|无|用户确认 header.X-Authorization|
-|data|array|==必须==|无|数据|
-
+  
+## 2. 添加序列信息
+  
+**`POST`** {domain}/seq
+  
 请求体：
-```json {.line-numbers}
+```json
 "data": [
     {
-        "gene_id": "",
+        "seq_id": "",
         "virus_strain_name": "",
         "accession_id": "",
         "data_source": "",
@@ -79,15 +74,15 @@
     }
 ]
 ```
-
+  
 返回：
-```json {.line-numbers}
+```json
 {
     "code": 200,
     "msg": "成功添加*条数据！",
     "data": [
         {
-            "gene_id": "",
+            "seq_id": "",
             "virus_strain_name": "",
             "accession_id": "",
             "data_source": "",
@@ -111,22 +106,16 @@
     "count": 10
 }
 ```
-
-
-3. 更新(修改)基因信息
-
-> ==PUT== {domain}/gene/:gene_id
-
-|参数|类型|必须/可选|默认|描述|
-|-|-|-|-|-|
-|Time|int|==必须==|无|时间戳 header.Time|
-|token|string|==必须==|无|用户确认 header.X-Authorization|
-|data|array|==必须==|无|只填写需更新部分及其id|
-
-请求体：
-```json {.line-numbers}
+  
+  
+## 3. 更新(修改)序列信息
+  
+**`PUT`** {domain}/seq/:seq_id
+  
+请求体(只填写需更新部分及其id)：
+```json
 "data": {
-    "gene_id": "",
+    "seq_id": "",
     "virus_strain_name": "",
     "accession_id": "",
     "data_source": "",
@@ -146,40 +135,31 @@
     "last_update_time": ""
 }
 ```
-
+  
 返回：
-```json {.line-numbers}
+```json
 {
     "code": 200,
     "msg": "修改成功！"
 }
 ```
-
-4. 删除基因信息
-
-> ==DELETE== {domain}/gene/:gene_id
-
-|参数|类型|必须/可选|默认|描述|
-|-|-|-|-|-|
-|Time|int|==必须==|无|时间戳 header.Time|
-|token|string|==必须==|无|用户确认 header.X-Authorization|
-
-```json {.line-numbers}
+  
+## 4. 删除序列信息
+  
+**`DELETE`** {domain}/seq/:seq_id
+  
+```json
 {
     "code": 200,
     "msg": "删除成功！"
 }
 ```
-
-5. 条目集合查询
-
-> ==GET== {domain}/gene/summary
-
-|参数|类型|必须/可选|默认|描述|
-|-|-|-|-|-|
-|Time|int|==必须==|无|时间戳 header.Time|
-
-```json {.line-numbers}
+  
+## 5. 条目集合查询
+  
+**`GET`** {domain}/seq/summary
+  
+```json
 {
     "code": 200,
     "msg": "查询成功！",
@@ -193,16 +173,12 @@
     }
 }
 ```
-
-5. 条目数量查询
-
-> ==GET== {domain}/gene/summary
-
-|参数|类型|必须/可选|默认|描述|
-|-|-|-|-|-|
-|Time|int|==必须==|无|时间戳 header.Time|
-
-```json {.line-numbers}
+  
+## 6. 条目数量查询
+  
+**`GET`** {domain}/seq/summary
+  
+```json
 {
     "code": 200,
     "msg": "查询成功！",
@@ -214,3 +190,5 @@
     }
 }
 ```
+
+
