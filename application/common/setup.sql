@@ -16,6 +16,19 @@ DESC user;
 -- INSERT INTO user (username, password, user_role) VALUES ('lingfangmin', 'lfm123456', '1');
 -- INSERT INTO user (username, password, user_role) VALUES ('zhangmeng', 'zm123456', '1');
 
+CREATE TABLE IF NOT EXISTS user_action (
+    user_action_id int PRIMARY KEY AUTO_INCREMENT,
+    user_id int NOT NULL,
+    create_at timestamp,
+    action varchar(25),
+    result_path varchar(100),
+    log_path varchar(100),
+    CONSTRAINT user_action
+        FOREIGN KEY(user_id) REFERENCES user(user_id)
+);
+
+DESC user_action;
+
 CREATE TABLE IF NOT EXISTS seq (
     seq_id int PRIMARY KEY AUTO_INCREMENT,
     user_id int,
@@ -57,14 +70,32 @@ CREATE TABLE IF NOT EXISTS gene_meta (
 
 DESC gene_meta;
 
-CREATE TABLE IF NOT EXISTS gene_exp {
+CREATE TABLE IF NOT EXISTS gene_exp (
     gene_exp_id int PRIMARY KEY AUTO_INCREMENT,
     gene_meta_id int,
-    gene varchar,
-    col varchar,
-    data varchar,
-    tpm decimal
-};
+    gene varchar(25),
+    col varchar(25),
+    data varchar(25),
+    CONSTRAINT gene_exp_meta
+        FOREIGN KEY(gene_meta_id) REFERENCES gene_meta(gene_meta_id),
+    CONSTRAINT gene_exp_anno 
+        FOREIGN KEY(gene) REFERENCES gene_anno(seq_id)
+);
 
 DESC gene_exp;
+
+CREATE TABLE IF NOT EXISTS gene_anno (
+    seq_id varchar(25) PRIMARY KEY,
+    source varchar(25),
+    type varchar(25),
+    start int,
+    end int,
+    score varchar(25),
+    strand varchar(3),
+    phase varchar(25),
+    gene_id varchar(25),
+    transcript_id varchar(25)
+);
+
+DESC gene_anno;
 

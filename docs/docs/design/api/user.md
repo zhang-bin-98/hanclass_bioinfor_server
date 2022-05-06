@@ -9,6 +9,7 @@
 |username|string|**必须**|无|用户名|
 |password|string|**必须**|无|加密后的用户密码|
 
+::: details 返回数据
 ```json {.line-numbers}
 {
     "code": 200,
@@ -23,6 +24,7 @@
     }
 }
 ```
+:::
 
 ### 2. 用户注册
 
@@ -34,6 +36,7 @@
 |password|string|**必须**|无|加密后的用户密码|
 |email|string|可选|无|邮箱|
 
+::: details 返回数据
 ```json {.line-numbers}
 {
     "code": 200,
@@ -48,11 +51,13 @@
     }
 }
 ```
+:::
 
 ### 3. 获取用户信息
 
 **`GET`** {domain}/user[/:user_id]
 
+::: details 返回数据
 ```json {.line-numbers}
 {
     "code": 200,
@@ -68,6 +73,7 @@
     ]
 }
 ```
+:::
 
 ### 4. 更新(修改)用户信息
 
@@ -80,38 +86,44 @@
 |password|string|可选|无|用户密码|
 |email|string|可选|无|邮箱|
 
+::: details 返回数据
 ```json {.line-numbers}
 {
     "code": 200,
     "msg": "修改成功！"
 }
 ```
+:::
 
 ### 6. 删除用户信息
 
 **`DELETE`** {domain}/user/:user_id
 
+::: details 返回数据
 ```json {.line-numbers}
 {
     "code": 200,
     "msg": "删除成功！"
 }
 ```
+:::
 
 ## 用户服务接口
 
-### 1. 请求服务接口
+### 1. blast
 
-**`POST`** {domain}/user/server/:sever_name
+#### 上传文件
 
-### 2. 上传文件文件接口
+**`POST`** {domain}/user/blast/
 
-**`POST`** {domain}/user/server/:sever_name/upload
+#### 获取结果
 
-### 3. 获取结果接口
+**`GET`** {domain}/user/blast/:server_id
 
-**`GET`** {domain}/user/server/:server_id
+#### 获取结果文件
 
-### 4. 获取结果文件
+**`GET`** {domain}/user/blast/:server_id/:file_name
 
-**`GET`** {domain}/user/server/:server_id/:file_name
+
+
+

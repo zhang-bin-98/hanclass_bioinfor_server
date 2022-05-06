@@ -12,7 +12,7 @@ domain: 10.1.70.10/students/202128010315003/tp5/public
 |list_rows|int|可选|20|每页数量|
 |查询条件|string|可选|无|参数与值|
   
-  
+::: details 返回数据
 ```json
 {
     "code": 200,
@@ -44,12 +44,13 @@ domain: 10.1.70.10/students/202128010315003/tp5/public
     }
 }
 ```
-  
+:::
+
 ## 2. 添加序列信息
   
 **`POST`** {domain}/seq
   
-请求体：
+::: details 请求体：
 ```json
 "data": [
     {
@@ -74,8 +75,9 @@ domain: 10.1.70.10/students/202128010315003/tp5/public
     }
 ]
 ```
-  
-返回：
+:::
+
+::: details 返回数据
 ```json
 {
     "code": 200,
@@ -106,13 +108,13 @@ domain: 10.1.70.10/students/202128010315003/tp5/public
     "count": 10
 }
 ```
-  
+:::
   
 ## 3. 更新(修改)序列信息
   
 **`PUT`** {domain}/seq/:seq_id
   
-请求体(只填写需更新部分及其id)：
+::: details 请求体：
 ```json
 "data": {
     "seq_id": "",
@@ -135,30 +137,35 @@ domain: 10.1.70.10/students/202128010315003/tp5/public
     "last_update_time": ""
 }
 ```
-  
-返回：
+::: 
+
+::: details 返回数据
 ```json
 {
     "code": 200,
     "msg": "修改成功！"
 }
 ```
-  
+:::  
+
 ## 4. 删除序列信息
   
 **`DELETE`** {domain}/seq/:seq_id
-  
+
+::: details 返回数据
 ```json
 {
     "code": 200,
     "msg": "删除成功！"
 }
 ```
-  
+:::
+
 ## 5. 条目集合查询
   
 **`GET`** {domain}/seq/summary
-  
+
+::: details 返回数据
 ```json
 {
     "code": 200,
@@ -173,11 +180,13 @@ domain: 10.1.70.10/students/202128010315003/tp5/public
     }
 }
 ```
-  
+:::  
+
 ## 6. 条目数量查询
   
 **`GET`** {domain}/seq/summary
-  
+
+::: details 返回数据 
 ```json
 {
     "code": 200,
@@ -190,5 +199,5 @@ domain: 10.1.70.10/students/202128010315003/tp5/public
     }
 }
 ```
-
+:::
 

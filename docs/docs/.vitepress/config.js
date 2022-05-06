@@ -19,10 +19,6 @@ export default defineConfig({
             {
                 text: '网站设计',
                 link: '/design/'
-            },
-            {
-                text: '网站首页',
-                link: 'http://10.1.70.10/students/202128010315003/'
             }
         ],
 

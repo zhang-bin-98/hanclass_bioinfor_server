@@ -27,15 +27,13 @@ Route::group('user', function() {
 ->prefix('UserController/')
 ->middleware('CheckToken');
 
-
-
-/****************** 基因数据管理 **********************/
+/****************** 序列数据管理 **********************/
 // 基因列表/详细信息
-Route::get('gene/summary', 'GeneController/summary');
-Route::get('gene/count', 'GeneController/count');
-Route::get('gene', 'GeneController/index');
+Route::get('seq/summary', 'SeqController/summary');
+Route::get('seq/count', 'SeqController/count');
+Route::get('seq', 'SeqController/index');
 
-Route::group('gene', function() {
+Route::group('seq', function() {
     // 添加基因信息
     Route::post('', 'create');
     // 更新(修改)基因信息
@@ -46,6 +44,22 @@ Route::group('gene', function() {
 ->prefix('GeneController/')
 ->middleware('CheckToken');
 
+/****************** 序列数据管理(旧) **********************/
+// 基因列表/详细信息
+Route::get('gene/old/summary', 'OldGeneController/summary');
+Route::get('gene/old/count', 'OldGeneController/count');
+Route::get('gene/old', 'OldGeneController/index');
+
+Route::group('gene/old', function() {
+    // 添加基因信息
+    Route::post('', 'create');
+    // 更新(修改)基因信息
+    Route::put(':id', 'update');
+    // 删除基因信息
+    Route::delete(':id', 'delete');
+})
+->prefix('OldGeneController/')
+->middleware('CheckToken');
 
 /********************* 用户工具 ********************/
 // blastn
