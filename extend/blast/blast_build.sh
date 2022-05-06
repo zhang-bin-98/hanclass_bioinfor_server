@@ -20,5 +20,5 @@ input=/opt/lampp/htdocs/students/202128010315003/tp5/extend/blast/test/test.txt
 cat $input |
 $blastn \
     -db $db  \
-    -out test_blastn.out \
-    -outfmt 0
+    -outfmt 0 \
+    > -out test_blastn.out

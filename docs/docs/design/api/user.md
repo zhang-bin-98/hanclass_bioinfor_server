@@ -124,6 +124,3 @@
 
 **`GET`** {domain}/user/blast/:server_id/:file_name
 
-
-
-

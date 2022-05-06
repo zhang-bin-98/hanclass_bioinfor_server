@@ -15,7 +15,7 @@
 flowchart LR
 
 首页 --> 序列列表
-    序列列表 --> 序列详情 
+    序列列表 --> 序列详情_删改
     序列列表 --> 序列上传
     序列列表 --> blust比对
 
@@ -23,11 +23,8 @@ flowchart LR
 首页 --> 用户列表
 
 首页 --> 基因列表
-    基因列表 --> 基因数据集列表 
-    基因列表 --> 基因上传
-    基因列表 --> 表达矩阵转换
+    基因列表 --> 基因数据集列表
     基因列表 --> 差异基因计算
-
 ```
 
 # 类关系图
@@ -56,16 +53,11 @@ UserController ..> JWT
 
 SeqController ..> SeqModel
 
-GeneController ..> GeneMetaModel
-GeneMetaModel -- GeneExpModel
 GeneController ..> GeneExpModel
-GeneController ..> GeneAnnoModel
-GeneAnnoModel -- GeneExpModel
+GeneController ..> GeneDegModel
 
 UserActionController ..> Blast
-UserActionController ..> Normalization
 UserActionController ..> DEG
-
 ```
 
 # 权限设计
@@ -93,7 +85,6 @@ UserActionController ..> DEG
 | 操作 | 匿名用户 | 普通用户 | 管理员 |
 |-|-|-|-|
 | blust | F | T | T |
-| 表达矩阵转换 | F | T | T |
 | 差异基因 | F | T | T |
 
 4. 注

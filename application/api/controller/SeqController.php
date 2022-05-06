@@ -235,7 +235,42 @@ class SeqController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = $request->user;
+        $seq = Seq::where('seq_id', $id)->find();
+
+        if(is_null($seq)) {
+            echo json_encode([
+                'code' => 400,
+                'msg' => "seq_id不存在"
+            ]);
+            die;
+        }
+
+        if (!(1 === $user['user_role'] || $seq['user_id'] == $user['user_id'])) {
+            echo json_encode([
+                'code' => 400,
+                'msg' => "权限不足"
+            ]);
+            die;
+        }
+
+        $seq_updata = $request->param('data');
+        unset($seq_updata['seq_id']);        
+
+        try {
+            Seq::where('seq_id', $id)->update($seq_updata);
+        } catch (\Exception $e) {
+            echo json_encode([
+                'code' => 400,
+                'msg' => "数据库错误：".$e->getMessage()
+            ]);
+            die;
+        }
+
+        return json_encode([
+            "code" => 200,
+            "meg" => "更新成功！"
+        ]);
     }
 
     /**
