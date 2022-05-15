@@ -46,3 +46,4 @@ Route::group('seq', function() {
 
 /********************* 用户工具 ********************/
 // blastn
+Route::post('blast', 'SeqController/blast');

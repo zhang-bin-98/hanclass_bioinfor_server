@@ -312,7 +312,52 @@ class SeqController extends Controller
 
         return json_encode([
             "code" => 200,
-            "meg" => "删除成功！"
+            "msg" => "删除成功！"
+        ]);
+    }
+
+    /**
+     * 删除指定资源
+     *
+     * @param  \think\Request  $request
+     * @return \think\Response
+     */
+    public function blast(Request $request)
+    {
+        $db = '/opt/lampp/htdocs/students/202128010315003/tp5/extend/blast/db/coronavirida.blastdb';
+        $seq = $request->param('seq');
+        if(is_null($seq)) {
+            return json_encode([
+                "code" => 200,
+                "msg" => "查询序列不存在"
+            ]);
+            die;
+        }
+        $blastn = "echo {$seq} | blastn -db {$db} -outfmt 0";
+
+        $word_size = $request->param('word_size');
+        if(!is_null($word_size)) {
+            $blastn = $blastn." -word_size {$word_size}";
+        }
+        $evalue = $request->param('evalue');
+        if(!is_null($evalue)) {
+            $blastn = $blastn." -evalue {$evalue} ";
+        }
+
+        try {
+            exec($blastn, $res);
+        } catch (\Exception $e) {
+            echo json_encode([
+                'code' => 400,
+                'msg' => "比对错误：".$e->getMessage()
+            ]);
+            die;
+        }
+
+        return json_encode([
+            "code" => 200,
+            "msg" => "比对完成",
+            "data" => $res
         ]);
     }
 }
