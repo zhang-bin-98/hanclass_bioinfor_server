@@ -255,7 +255,7 @@ class SeqController extends Controller
         }
 
         $seq_updata = $request->param('data');
-        unset($seq_updata['seq_id']);        
+        unset($seq_updata['seq_id']);
 
         try {
             Seq::where('seq_id', $id)->update($seq_updata);
@@ -317,7 +317,7 @@ class SeqController extends Controller
     }
 
     /**
-     * 删除指定资源
+     * blast
      *
      * @param  \think\Request  $request
      * @return \think\Response

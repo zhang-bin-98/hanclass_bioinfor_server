@@ -47,3 +47,11 @@ Route::group('seq', function() {
 /********************* 用户工具 ********************/
 // blastn
 Route::post('blast', 'SeqController/blast');
+
+/****************** 基因数据 **********************/
+
+Route::get('gene', 'GeneController/index');
+Route::post('gene', 'GeneController/exp');
+
+/****************** 删除日志 **********************/
+Route::get('cache', 'CacheController/clearLog');

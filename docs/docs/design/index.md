@@ -12,19 +12,17 @@
 #  基本设计
 
 ```mermaid
-flowchart LR
+flowchart TD
 
 首页 --> 序列列表
     序列列表 --> 序列详情_删改
-    序列列表 --> 序列上传
-    序列列表 --> blust比对
+首页 --> 序列上传
+首页 --> blust比对
 
 首页 --> 登录/注册
 首页 --> 用户列表
 
-首页 --> 基因列表
-    基因列表 --> 基因数据集列表
-    基因列表 --> 差异基因计算
+首页 --> 基因表达
 ```
 
 # 类关系图
@@ -34,19 +32,13 @@ classDiagram
 
 class UserModel
 class SeqModel
-class GeneMetaModel
 class GeneExpModel
-class GeneAnnoModel
 
 class UserController
 class SeqController
 class GeneController
-class UserActionController
 
 class JWT
-class Blast
-class Normalization
-class DEG
 
 UserController ..> UserModel
 UserController ..> JWT
@@ -55,9 +47,6 @@ SeqController ..> SeqModel
 
 GeneController ..> GeneExpModel
 GeneController ..> GeneDegModel
-
-UserActionController ..> Blast
-UserActionController ..> DEG
 ```
 
 # 权限设计
@@ -77,7 +66,6 @@ UserActionController ..> DEG
 |-|-|-|-|
 | 增 | T | F | F |
 | 删 | F | T(个人) | T |
-| 改 | F | T(个人) | T |
 | 查 | F | T(个人) | T |
 
 3. 用户服务
@@ -85,7 +73,6 @@ UserActionController ..> DEG
 | 操作 | 匿名用户 | 普通用户 | 管理员 |
 |-|-|-|-|
 | blust | F | T | T |
-| 差异基因 | F | T | T |
 
 4. 注
     + 所有请求头需添加时间戳`Time`

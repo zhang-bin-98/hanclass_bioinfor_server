@@ -4,6 +4,8 @@ namespace app\api\controller;
 
 use think\Controller;
 use think\Request;
+use app\api\model\GeneDeg;
+use app\api\model\GeneExp;
 
 class GeneController extends Controller
 {
@@ -14,72 +16,54 @@ class GeneController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            // $degs = GeneDeg::all();
+            $degs = GeneDeg::field('gene_id,gene_name,log2_fold_change,pvalue,padj')
+            ->order(['padj','log2_fold_change'=>'desc'])
+            ->select();
+        } catch (\Exception $e) {
+            echo json_encode([
+                'code' => 400,
+                'msg' => "查询错误：".$e->getMessage(),
+            ]);
+            die;
+        }
+
+        return json_encode([
+            "code" => 200,
+            "msg" => "查询成功",
+            "data" => $degs
+        ]);
     }
 
     /**
-     * 显示创建资源表单页.
+     * 显示资源列表
      *
      * @return \think\Response
      */
-    public function create()
+    public function exp(Request $request)
     {
-        //
-    }
+        $id_arrray = explode(",",$request->param('ids'));
+        
+        try {
+            $exps = GeneExp::where([
+                'gene_id' => $id_arrray
+            ])
+            ->field('gene_id,gene_name,col,data')
+            ->select();
+        } catch (\Exception $e) {
+            echo json_encode([
+                'code' => 400,
+                'msg' => "查询错误：".$e->getMessage(),
+            ]);
+            die;
+        }
 
-    /**
-     * 保存新建的资源
-     *
-     * @param  \think\Request  $request
-     * @return \think\Response
-     */
-    public function save(Request $request)
-    {
-        //
+        return json_encode([
+            "code" => 200,
+            "msg" => "查询成功",
+            "data" => $exps
+        ]);
     }
-
-    /**
-     * 显示指定的资源
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function read($id)
-    {
-        //
-    }
-
-    /**
-     * 显示编辑资源表单页.
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * 保存更新的资源
-     *
-     * @param  \think\Request  $request
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * 删除指定资源
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function delete($id)
-    {
-        //
-    }
+    
 }
