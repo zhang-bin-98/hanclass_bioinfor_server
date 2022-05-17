@@ -1,7 +1,9 @@
 import MermaidPlugin from "vitepress-plugin-mermaid";
 import { defineConfig } from 'vitepress'
 
+
 export default defineConfig({
+    base: '/students/202128010315003/docs/',
     title: '课程设计文档',
     markdown: {
         config: MermaidPlugin,
@@ -19,6 +21,14 @@ export default defineConfig({
             {
                 text: '网站设计',
                 link: '/design/'
+            },
+            { 
+                text: '数据来源与数据处理', 
+                link: '/data/'
+            },
+            {
+                text: '课程要求',
+                link: '/project'
             }
         ],
 
@@ -27,10 +37,14 @@ export default defineConfig({
                 text: '使用介绍', 
                 link: '/usage/'
             }],
+            '/data/': [
+                { text: '数据来源', link: '/data/' },
+                { text: '数据处理', link: '/data/process' },
+            ],
             '/design/': [
                 { text: '基本介绍', link: '/design/' },
                 { text: '功能设计', link: '/design/server' },
-                // { text: '数据库设计', link: '/design/database' },
+                { text: '数据库设计', link: '/design/database' },
                 { 
                     text: 'API设计', 
                     children: [

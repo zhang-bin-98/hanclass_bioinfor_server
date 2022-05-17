@@ -1,1 +1,0 @@
-domain: 10.1.70.10/students/202128010315003/tp5/public
