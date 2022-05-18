@@ -27,15 +27,13 @@ Route::group('user', function() {
 ->prefix('UserController/')
 ->middleware('CheckToken');
 
+/****************** 序列数据管理 **********************/
+// 序列
+Route::get('seq/summary', 'SeqController/summary');
+Route::get('seq/count', 'SeqController/count');
+Route::get('seq', 'SeqController/index');
 
-
-/****************** 基因数据管理 **********************/
-// 基因列表/详细信息
-Route::get('gene/summary', 'GeneController/summary');
-Route::get('gene/count', 'GeneController/count');
-Route::get('gene', 'GeneController/index');
-
-Route::group('gene', function() {
+Route::group('seq', function() {
     // 添加基因信息
     Route::post('', 'create');
     // 更新(修改)基因信息
@@ -43,6 +41,17 @@ Route::group('gene', function() {
     // 删除基因信息
     Route::delete(':id', 'delete');
 })
-->prefix('GeneController/')
+->prefix('SeqController/')
 ->middleware('CheckToken');
 
+/********************* 用户工具 ********************/
+// blastn
+Route::post('blast', 'SeqController/blast');
+
+/****************** 基因数据 **********************/
+
+Route::get('gene', 'GeneController/index');
+Route::post('gene', 'GeneController/exp');
+
+/****************** 删除日志 **********************/
+Route::get('cache', 'CacheController/clearLog');

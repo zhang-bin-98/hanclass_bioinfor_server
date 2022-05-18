@@ -4,7 +4,7 @@ namespace app\api\validate;
 
 use think\Validate;
 
-class Gene extends Validate
+class Seq extends Validate
 {
     /**
      * 定义验证规则
@@ -14,10 +14,10 @@ class Gene extends Validate
      */	
 	protected $rule = [
         'accession_id' => 'require',
-        'sequence_length' => 'integer' ,
-        'sample_collection_date' => 'dateFormat:Y-m-d' ,
-        'submission_date' => 'dateFormat:Y-m-d' ,
-        'create_time' => 'dateFormat:Y-m-d H:i:s' ,
+        'sequence_length' => 'integer',
+        'sample_collection_date' => 'dateFormat:Y-m-d',
+        'submission_date' => 'dateFormat:Y-m-d',
+        'create_time' => 'dateFormat:Y-m-d H:i:s',
         'last_update_time' => 'dateFormat:Y-m-d H:i:s',
         'sequence_quality' => ['regex'=>'/^(High|Low)$/'],
         'quality_assessment' => ['regex'=>'/^(\/?.*?){5}$/'],

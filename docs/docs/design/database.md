@@ -1,5 +1,15 @@
+# 数据库设计
 
+## 1. 用户模块
++ user 表: 存储用户信息
 
+    | user_role.value | annotation |
+    | :-: | :-: |
+    | 0 | 普通用户 |
+    | 1 | 管理员 |
+
+```sql
+--用户信息
 CREATE TABLE IF NOT EXISTS user (
     user_id int PRIMARY KEY AUTO_INCREMENT,
     username varchar(25) NOT NULL UNIQUE,
@@ -8,14 +18,14 @@ CREATE TABLE IF NOT EXISTS user (
     create_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     user_role int NOT NULL DEFAULT 0
 );
+```
 
-DESC user;
+## 2. 序列模块
++ seq 表: 存储序列信息
 
--- INSERT INTO user (username, password, user_role) VALUES ('zhangbin', 'zb123456', '1');
--- INSERT INTO user (username, password, user_role) VALUES ('guoxutong', 'gxt123456', '1');
--- INSERT INTO user (username, password, user_role) VALUES ('lingfangmin', 'lfm123456', '1');
--- INSERT INTO user (username, password, user_role) VALUES ('zhangmeng', 'zm123456', '1');
+```sql
 
+--序列信息
 CREATE TABLE IF NOT EXISTS seq (
     seq_id int PRIMARY KEY AUTO_INCREMENT,
     user_id int,
@@ -39,9 +49,28 @@ CREATE TABLE IF NOT EXISTS seq (
     CONSTRAINT user_seq 
         FOREIGN KEY(user_id) REFERENCES user(user_id)
 );
+```
 
-DESC seq;
+## 3. 基因模块
++ gene_deg 表: 存储差异基因信息
+```sql
+--差异基因信息
+CREATE TABLE IF NOT EXISTS gene_deg (
+    gene_id varchar(25) PRIMARY KEY,
+    baseMean varchar(25),
+    log2_fold_change varchar(25),
+    lfcSE varchar(25),
+    stat varchar(25),
+    pvalue varchar(25),
+    padj varchar(25),
+    gene_name varchar(25)
+);
+```
 
++ gene_exp 表: 存储rlog转换后的表达矩阵
+
+```sql
+--表达矩阵
 CREATE TABLE IF NOT EXISTS gene_exp (
     gene_exp_id int PRIMARY KEY AUTO_INCREMENT,
     gene_id varchar(25),
@@ -50,32 +79,8 @@ CREATE TABLE IF NOT EXISTS gene_exp (
     data varchar(25)
 );
 
-DESC gene_exp;
+```
 
-LOAD DATA LOCAL INFILE '/opt/lampp/htdocs/students/202128010315003/tp5/extend/DEG/deseq2_171742/rlog_data_longer.csv' 
-INTO TABLE s202128010315003.gene_exp 
-FIELDS TERMINATED BY ','
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(gene_id,gene_name,col,data);
 
-CREATE TABLE IF NOT EXISTS gene_deg (
-    gene_id varchar(25) PRIMARY KEY,
-    baseMean varchar(25),
-    log2FoldChange varchar(25),
-    lfcSE varchar(25),
-    stat varchar(25),
-    pvalue varchar(25),
-    padj varchar(25),
-    gene_name varchar(25)
-);
 
-DESC gene_deg;
 
-LOAD DATA LOCAL INFILE '/opt/lampp/htdocs/students/202128010315003/tp5/extend/DEG/deseq2_171742/res_gene_data.csv' 
-INTO TABLE s202128010315003.gene_deg 
-FIELDS TERMINATED BY ','
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS;
