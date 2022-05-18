@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS gene_exp (
 
 DESC gene_exp;
 
-LOAD DATA LOCAL INFILE '/opt/lampp/htdocs/students/202128010315003/tp5/extend/DEG/deseq2_res/rlog_data_longer.csv' 
+LOAD DATA LOCAL INFILE '/opt/lampp/htdocs/students/202128010315003/tp5/extend/DEG/deseq2_171742/rlog_data_longer.csv' 
 INTO TABLE s202128010315003.gene_exp 
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -63,7 +63,7 @@ IGNORE 1 ROWS
 CREATE TABLE IF NOT EXISTS gene_deg (
     gene_id varchar(25) PRIMARY KEY,
     baseMean varchar(25),
-    log2_fold_change varchar(25),
+    log2FoldChange varchar(25),
     lfcSE varchar(25),
     stat varchar(25),
     pvalue varchar(25),
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS gene_deg (
 
 DESC gene_deg;
 
-LOAD DATA LOCAL INFILE '/opt/lampp/htdocs/students/202128010315003/tp5/extend/DEG/deseq2_res/res_gene_data.csv' 
+LOAD DATA LOCAL INFILE '/opt/lampp/htdocs/students/202128010315003/tp5/extend/DEG/deseq2_171742/res_gene_data.csv' 
 INTO TABLE s202128010315003.gene_deg 
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'

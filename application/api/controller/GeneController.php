@@ -18,8 +18,8 @@ class GeneController extends Controller
     {
         try {
             // $degs = GeneDeg::all();
-            $degs = GeneDeg::field('gene_id,gene_name,log2_fold_change,pvalue,padj')
-            ->order(['padj','log2_fold_change'=>'desc'])
+            $degs = GeneDeg::field('gene_id,gene_name,log2FoldChange,pvalue,padj')
+            ->order(['padj','log2FoldChange'=>'desc'])
             ->select();
         } catch (\Exception $e) {
             echo json_encode([

@@ -16,5 +16,5 @@
 ## 差异基因来源
 
 我们使用了2022年发布在GEO上的
-[GSE181238](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE181238)
+[GSE171742](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE171742)
 数据集计算了差异基因
