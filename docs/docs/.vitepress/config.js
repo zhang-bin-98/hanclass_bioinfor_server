@@ -15,7 +15,7 @@ export default defineConfig({
                 link: '/'
             },
             { 
-                text: '使用介绍', 
+                text: '使用说明', 
                 link: '/usage/'
             },
             {
@@ -34,7 +34,7 @@ export default defineConfig({
 
         sidebar: {
             '/usage/': [{
-                text: '使用介绍', 
+                text: '使用说明', 
                 link: '/usage/'
             }],
             '/data/': [

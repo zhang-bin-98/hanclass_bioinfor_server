@@ -59,11 +59,11 @@ flowchart TD
 
 + 准备
 ```R
-ctrl <- "C"
-case <- "P"
+ctrl <- "control"
+case <- "Nsp8"
 
 count_mat <- df %>%
-    column_to_rownames("gene") %>%
+    column_to_rownames("gene_id") %>%
     select(
         starts_with(ctrl),
         starts_with(case)
@@ -96,16 +96,16 @@ res <- results(dds2)
 
 res %>%
     as.data.frame() %>%
-    rownames_to_column("gene") %>%
+    rownames_to_column("gene_id") %>%
     arrange(padj) %>%
     inner_join(
         counts(dds2, normalize = TRUE) %>%
             as.data.frame() %>%
-            rownames_to_column("gene")
+            rownames_to_column("gene_id")
     ) %>%
     left_join(
         df %>%
-            select(gene, gene_name)
+            select(gene_id, gene_name)
     ) %>%
     write_csv("res_data.csv")
 ```
@@ -116,11 +116,11 @@ rld <- rlog(dds2)
 rld %>%
     assay() %>%
     as.data.frame() %>%
-    rownames_to_column("gene") %>%
+    rownames_to_column("gene_id") %>%
     as_tibble() %>%
     left_join(
         df %>%
-            select(gene, gene_name)
+            select(gene_id, gene_name)
     ) %>%
     write_csv("rlog_data.csv")
 ```

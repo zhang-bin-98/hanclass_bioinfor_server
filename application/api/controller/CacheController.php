@@ -12,6 +12,6 @@ class CacheController extends Controller {
 			array_map("unlink", glob($val.'/'.'*.*'));
 			rmdir($val);
 		}
-		return '清除成功';
+		return '清除成功'.dirname('__FILE__');
 	}
 }

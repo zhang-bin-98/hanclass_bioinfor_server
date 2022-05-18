@@ -1,4 +1,4 @@
-# 中国2019新型冠状病毒信息数据库
+# 新型冠状病毒信息数据库
 
 ## 序列数据来源
 
@@ -13,7 +13,7 @@
 [NCBI 核酸数据库](https://www.ncbi.nlm.nih.gov/nucleotide/)
 。
 
-## 差异基因来源
+## 基因数据来源
 
 我们使用了2022年发布在GEO上的
 [GSE171742](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE171742)
